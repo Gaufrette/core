@@ -8,18 +8,26 @@ class File
     public $metadata;
     public $name;
 
-    protected $adapter;
+    protected $adapters = array();
 
     public function __construct(Adapter $adapter, $name)
     {
-        $this->adapter = $adapter;
+        $this->addAdapter($adapter);
         $this->name = $name;
-        $this->content = $this->adapter->getContent($this);
-        $this->metadata = $this->adapter->getMetadata($this);
+        $this->content = $adapter->getContent($this);
+        $this->metadata = $adapter->getMetadata($this);
     }
 
     public function save()
     {
-        $this->adapter->write($this);
+        foreach ($this->adapters as $adapter)
+        {
+            $adapter->write($this);
+        }
+    }
+
+    public function addAdapter(Adapter $adapter)
+    {
+        $this->adapters[] = $adapter;
     }
 }

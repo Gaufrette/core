@@ -16,4 +16,9 @@ class Filesystem
     {
         return $this->fileFactory->create($this->adapter, $name);
     }
+
+    public function importFile(File $file)
+    {
+        $file->addAdapter($this->adapter);
+    }
 }
