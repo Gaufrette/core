@@ -8,11 +8,11 @@ class File
     public $metadata;
     public $name;
 
-    protected $adapters = array();
+    protected $adapter;
 
     public function __construct(Adapter $adapter, $name)
     {
-        $this->addAdapter($adapter);
+        $this->setAdapter($adapter);
         $this->name = $name;
         $this->content = $adapter->getContent($this);
         $this->metadata = $adapter->getMetadata($this);
@@ -20,14 +20,11 @@ class File
 
     public function save()
     {
-        foreach ($this->adapters as $adapter)
-        {
-            $adapter->write($this);
-        }
+        $this->adapter->write($this);
     }
 
-    public function addAdapter(Adapter $adapter)
+    public function setAdapter(Adapter $adapter)
     {
-        $this->adapters[] = $adapter;
+        $this->adapter = $adapter;
     }
 }

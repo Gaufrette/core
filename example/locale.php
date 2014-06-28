@@ -16,7 +16,6 @@ $foo->metadata = ['author' => 'GildasQ'];
 $foo->save();
 
 // Synchronize the file within another filesystem
-$fs2->importFile($foo);
-$foo->content = 'Une histoire de foo';
-$foo->save(); // foo.txt exists now both in /tmp/gaufrette1 and /tmp/gaufrette2
-              // and both files content is "Une histoire de foo"
+$foo2 = $fs2->importFile($foo);
+$foo2->content = 'Une histoire de foo';
+$foo2->save(); // foo.txt exists now both in /tmp/gaufrette1 and /tmp/gaufrette2

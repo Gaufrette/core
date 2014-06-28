@@ -19,6 +19,9 @@ class Filesystem
 
     public function importFile(File $file)
     {
-        $file->addAdapter($this->adapter);
+        $file = clone $file;
+        $file->setAdapter($this->adapter);
+
+        return $file;
     }
 }
