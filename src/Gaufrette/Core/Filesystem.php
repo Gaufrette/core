@@ -3,6 +3,7 @@
 namespace Gaufrette\Core;
 
 use Gaufrette\Core\FileFactory;
+use Gaufrette\Core\AdapterInterface;
 use Gaufrette\Core\FileInterface;
 
 /**
@@ -18,13 +19,19 @@ class Filesystem
     private $fileFactory;
 
     /**
+     * @var AdapterInterface $adapter
+     */
+    private $adapter;
+
+    /**
      * @param FileFactory $fileStat
      *
      * @return
      */
-    public function __construct(FileFactory $fileFactory)
+    public function __construct(FileFactory $fileFactory, AdapterInterface $adapter)
     {
         $this->fileFactory = $fileFactory;
+        $this->adapter     = $adapter;
     }
 
     public function createStream($key)
@@ -35,7 +42,7 @@ class Filesystem
     /**
      * @param string $name
      *
-     * @return File
+     * @return FileInterface
      */
     public function get($name)
     {
@@ -49,6 +56,8 @@ class Filesystem
      */
     public function save(FileInterface $file)
     {
+        $this->adapter->save($file);
+
         return $this;
     }
 
@@ -59,6 +68,18 @@ class Filesystem
      */
     public function delete(FileInterface $file)
     {
+        $this->adapter->delete($file);
+
         return $this;
+    }
+
+    /**
+     * Returns the adapter
+     *
+     * @return Adapter
+     */
+    public function getAdapter()
+    {
+        return $this->adapter;
     }
 }
