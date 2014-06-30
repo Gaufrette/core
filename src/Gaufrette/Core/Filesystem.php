@@ -46,7 +46,9 @@ class Filesystem
      */
     public function get($name)
     {
-        return $this->fileFactory->createFile($name);
+        $file = $this->fileFactory->createFile($name);
+
+        return $this->adapter->get($file);
     }
 
     /**
@@ -71,15 +73,5 @@ class Filesystem
         $this->adapter->delete($file);
 
         return $this;
-    }
-
-    /**
-     * Returns the adapter
-     *
-     * @return Adapter
-     */
-    public function getAdapter()
-    {
-        return $this->adapter;
     }
 }
