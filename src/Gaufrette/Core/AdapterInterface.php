@@ -12,11 +12,11 @@ interface AdapterInterface
     /**
      * Reads the content of the file
      *
-     * @param string $name
+     * @param FileInterface $file
      *
      * @return FileInterface
      */
-    public function get($name);
+    public function get(FileInterface $file);
 
     /**
      * Writes the given content into the file

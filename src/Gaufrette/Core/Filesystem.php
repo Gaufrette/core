@@ -2,8 +2,8 @@
 
 namespace Gaufrette\Core;
 
-use Gaufrette\Core\FileFactory;
 use Gaufrette\Core\AdapterInterface;
+use Gaufrette\Core\FileFactory;
 use Gaufrette\Core\FileInterface;
 
 /**

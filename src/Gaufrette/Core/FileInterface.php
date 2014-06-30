@@ -65,10 +65,12 @@ interface FileInterface
      *
      * @return FileInterface
      */
-    public function setMetadata($key, $content);
+    public function addMetadata($key, $content);
 
     /**
-     * @return array
+     * @param array $metadata
+     *
+     * @return FileInterface
      */
-    public function getAllMetadata();
+    public function setMetadata(array $metadata);
 }

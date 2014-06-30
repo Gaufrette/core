@@ -111,9 +111,19 @@ class File implements FileInterface
     /**
      * {@inheritdoc}
      */
-    public function setMetadata($key, $content)
+    public function setMetadata(array $metadata)
     {
-        $this->metadata[$key] = $content;
+        $this->metadata = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addMetadata($key, $value)
+    {
+        $this->metadata[$key] = $value;
 
         return $this;
     }
