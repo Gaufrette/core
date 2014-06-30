@@ -125,4 +125,12 @@ class File implements FileInterface
     {
         return array_key_exists($key, $this->metadata) ? $this->metadata[$key] : array();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllMetadata()
+    {
+        return $this->metadata;
+    }
 }
