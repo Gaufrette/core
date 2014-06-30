@@ -2,6 +2,8 @@
 
 namespace Gaufrette\Core;
 
+use Gaufrette\Core\FileInterface;
+
 /**
  * Interface for the filesystem adapters
  */
@@ -12,21 +14,21 @@ interface AdapterInterface
      *
      * @param string $name
      *
-     * @return File
+     * @return FileInterface
      */
     public function get($name);
 
     /**
      * Writes the given content into the file
      *
-     * @param File $file
+     * @param FileInterface $file
      */
-    public function save(File $file);
+    public function save(FileInterface $file);
 
     /**
      * Deletes the file
      *
-     * @param File $file
+     * @param FileInterface $file
      */
-    public function delete(File $file);
+    public function delete(FileInterface $file);
 }
