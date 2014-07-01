@@ -50,6 +50,9 @@ class Local implements AdapterInterface
     public function delete(FileInterface $file)
     {
         unlink($this->getFilePath($file->getName()));
+        if (is_file($this->getFilePath($file->getName() . '_meta'))) {
+            unlink($this->getFilePath($file->getName() . '_meta'));
+        }
     }
 
     public function exists(FileInterface $file)
