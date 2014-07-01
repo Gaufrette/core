@@ -17,7 +17,7 @@ class Local implements AdapterInterface
         $filepath = $this->getFilePath($file->getName());
         $metapath = $this->getFilePath($file->getName() . '_meta');
 
-        if (!is_file($filepath)) {
+        if (false === $this->exists($file)) {
             throw new \Exception(sprintf(
                 'File "%s" not found',
                 $filepath
@@ -34,11 +34,14 @@ class Local implements AdapterInterface
 
     public function save(FileInterface $file)
     {
-        file_put_contents($this->getFilePath($file->getName()), $file->getContent());
+        $filepath = $this->getFilePath($file->getName());
+        $metapath = $this->getFilePath($file->getName() . '_meta');
+
+        file_put_contents($filepath, $file->getContent());
 
         if (!empty($file->getAllMetadata())) {
             file_put_contents(
-                $this->getFilePath($file->getName() . '_meta'),
+                $metapath,
                 serialize($file->getAllMetadata())
             );
         }
@@ -47,6 +50,11 @@ class Local implements AdapterInterface
     public function delete(FileInterface $file)
     {
         unlink($this->getFilePath($file->getName()));
+    }
+
+    public function exists(FileInterface $file)
+    {
+        return is_file($this->getFilePath($file->getName()));
     }
 
     protected function getFilePath($filename)

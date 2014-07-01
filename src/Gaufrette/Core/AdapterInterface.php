@@ -31,4 +31,12 @@ interface AdapterInterface
      * @param FileInterface $file
      */
     public function delete(FileInterface $file);
+
+    /**
+     * Return TRUE if the file exists, FALSE else
+     *
+     * @param FileInterface $file
+     * @return boolean
+     */
+    public function exists(FileInterface $file);
 }

@@ -47,8 +47,9 @@ class Filesystem
     public function get($name)
     {
         $file = $this->fileFactory->createFile($name);
+        $file = $this->adapter->get($file);
 
-        return $this->adapter->get($file);
+        return $file;
     }
 
     /**
@@ -73,5 +74,15 @@ class Filesystem
         $this->adapter->delete($file);
 
         return $this;
+    }
+
+    /**
+     * @param FileInterface $file
+     *
+     * @return boolean
+     */
+    public function exists(FileInterface $file)
+    {
+        return $this->adapter->exists($file);
     }
 }
