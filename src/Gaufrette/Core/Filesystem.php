@@ -2,6 +2,7 @@
 
 namespace Gaufrette\Core;
 
+use Gaufrette\Core\AdapterInterface;
 use Gaufrette\Core\FileFactory;
 use Gaufrette\Core\FileInterface;
 
@@ -18,28 +19,31 @@ class Filesystem
     private $fileFactory;
 
     /**
-     * @param FileFactory $fileStat
+     * @var AdapterInterface $adapter
+     */
+    private $adapter;
+
+    /**
      *
      * @return
      */
-    public function __construct(FileFactory $fileFactory)
+    public function __construct(FileFactory $fileFactory, AdapterInterface $adapter)
     {
         $this->fileFactory = $fileFactory;
-    }
-
-    public function createStream($key)
-    {
-        return $this->adapter->createStream($key);
+        $this->adapter     = $adapter;
     }
 
     /**
      * @param string $name
      *
-     * @return File
+     * @return FileInterface
      */
     public function get($name)
     {
-        return $this->fileFactory->createFile($name);
+        $file = $this->fileFactory->createFile($name);
+        $file = $this->adapter->get($file);
+
+        return $file;
     }
 
     /**
@@ -49,6 +53,8 @@ class Filesystem
      */
     public function save(FileInterface $file)
     {
+        $this->adapter->save($file);
+
         return $this;
     }
 
@@ -59,6 +65,18 @@ class Filesystem
      */
     public function delete(FileInterface $file)
     {
+        $this->adapter->delete($file);
+
         return $this;
+    }
+
+    /**
+     * @param FileInterface $file
+     *
+     * @return boolean
+     */
+    public function exists(FileInterface $file)
+    {
+        return $this->adapter->exists($file);
     }
 }

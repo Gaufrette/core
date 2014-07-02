@@ -13,21 +13,21 @@ class ContentManager
     /**
      * @var Filesystem $filesystem
      */
-    protected $filesystem;
+    private $filesystem;
 
     /**
-     * @var FileFactory $fileFactory
+     * @var FileFactory $factory
      */
-    protected $fileFactory;
+    private $factory;
 
     /**
      * @param Filesystem $filesystem
-     * @param FileFactory $fileFactory
+     * @param FileFactory $factory
      */
-    public function __construct(Filesystem $filesystem, FileFactory $fileFactory)
+    public function __construct(Filesystem $filesystem, FileFactory $factory)
     {
         $this->filesystem  = $filesystem;
-        $this->fileFactory = $fileFactory;
+        $this->factory = $factory;
     }
 
     /**

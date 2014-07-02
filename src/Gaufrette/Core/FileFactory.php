@@ -15,6 +15,8 @@ class FileFactory
      * @var string $name
      * @var string $content
      *
+     * @param string $name
+     * @param string $content
      * @return File
      */
     public function createFile($name = null, $content = null)
