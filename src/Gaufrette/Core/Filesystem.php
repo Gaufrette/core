@@ -24,7 +24,6 @@ class Filesystem
     private $adapter;
 
     /**
-     * @param FileFactory $fileStat
      *
      * @return
      */
@@ -32,11 +31,6 @@ class Filesystem
     {
         $this->fileFactory = $fileFactory;
         $this->adapter     = $adapter;
-    }
-
-    public function createStream($key)
-    {
-        return $this->adapter->createStream($key);
     }
 
     /**

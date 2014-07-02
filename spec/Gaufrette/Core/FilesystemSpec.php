@@ -3,7 +3,6 @@
 namespace spec\Gaufrette\Core;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Gaufrette\Core\FileFactory;
 use Gaufrette\Core\AdapterInterface;
 

@@ -22,6 +22,7 @@ interface AdapterInterface
      * Writes the given content into the file
      *
      * @param FileInterface $file
+     * @return void
      */
     public function save(FileInterface $file);
 
@@ -29,6 +30,7 @@ interface AdapterInterface
      * Deletes the file
      *
      * @param FileInterface $file
+     * @return void
      */
     public function delete(FileInterface $file);
 

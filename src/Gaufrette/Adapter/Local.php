@@ -7,6 +7,8 @@ use Gaufrette\Core\FileInterface;
 
 class Local implements AdapterInterface
 {
+    private $basePath;
+
     public function __construct($basePath)
     {
         $this->basePath = $basePath;
@@ -60,6 +62,9 @@ class Local implements AdapterInterface
         return is_file($this->getFilePath($file->getName()));
     }
 
+    /**
+     * @param string $filename
+     */
     protected function getFilePath($filename)
     {
         return $this->basePath . DIRECTORY_SEPARATOR . $filename;
